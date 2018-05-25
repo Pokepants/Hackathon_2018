@@ -21,10 +21,12 @@ AudioMetaData [] meta;
 int numSongs = 1;
 
 //<BUTTONS>
-PVector button;
-PVector buttonSize;
+PVector song1;
+PVector song1Size;
 PVector durationDisplay;
 PVector durationDisplaySize;
+PVector waitDisplay;
+PVector waitDisplaySize;
 
 //<TIMER>
 int input;
@@ -62,24 +64,27 @@ void init()
   }
 
   mouse = new PVector();
-  button = new PVector(width/2, height/2);
-  buttonSize = new PVector (50, 50);
-  durationDisplay = new PVector(width/2, height*0.75);
-  durationDisplaySize = new PVector (400, 40);
+  song1 = new PVector(width/2, height/2);
+  song1Size = new PVector (50, 50);
+  durationDisplay = new PVector(width*0.25, height*0.55);
+  durationDisplaySize = new PVector (150, 30);
+  waitDisplay = new PVector(width*0.25, height/2);
+  waitDisplaySize = new PVector (150, 30);
 }
 
 void Buttons()
 {
   stroke(0);
   fill(255);
-  rect(button.x, button.y, buttonSize.x, buttonSize.y);
+  rect(song1.x, song1.y, song1Size.x, song1Size.y);
 
   stroke(0);
   fill(255);
-  rect(durationDisplay.x, durationDisplay.y, durationDisplaySize.x, durationDisplaySize.y);
+  rect(waitDisplay.x, waitDisplay.y, waitDisplaySize.x, waitDisplaySize.y);
   
   stroke(0);
   fill(255);
+  rect(durationDisplay.x, durationDisplay.y, durationDisplaySize.x, durationDisplaySize.y);
 }
 
 void Timer()
@@ -88,20 +93,16 @@ void Timer()
   textSize(20);
   fill(0);
   text(timer/1000 + " s", durationDisplay.x, durationDisplay.y);
-  text(delay/1000 + " s", durationDisplay.x, durationDisplay.y + 40);
+  text(delay/1000 + " s", waitDisplay.x, waitDisplay.y);
 }
 
 
 void mouseClicked()
 {
-  if (abs(mouse.x - button.x) < buttonSize.x/2 && abs(mouse.y - button.y) < buttonSize.y/2)
+  if (abs(mouse.x - song1.x) < song1Size.x/2 && abs(mouse.y - song1.y) < song1Size.y/2)
   {
     println("...");
     player[0].play();
-  }
-  if (abs(mouse.x - durationDisplay.x) < durationDisplaySize.x/2 && abs(mouse.y - durationDisplay.y) < durationDisplaySize.y/2)
-  {
-    println("working");
   }
 }
 
