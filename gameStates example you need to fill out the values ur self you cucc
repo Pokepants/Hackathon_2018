@@ -1,0 +1,38 @@
+int gameStates = 0;
+boolean getIn = false;
+//keep a rectangle in the bottom right corner in all gameSates
+void menu(){
+ backgroud(whatever color);
+ fill(whatever the rectangle color is);
+ rect(w,h,x,y);//rectangle for audio player
+ rect(w,h,x,y);//rectangle for instructions
+ if(getIn = false){
+  if(the rectangle for the audio player is pressed){
+   gameStates = 1;
+  }
+  if(the rectangle for the instructions is pressed){
+   gameStates = 2;
+  }
+ }
+}
+void instruct(){ 
+ backgroud(whatever color);
+ text("->Press d for a delay.",x,y);
+ text("->Press t for a timer.",x,y);
+ text("->Press enter to confirm delay or timer.",x,y);
+}
+void draw(){
+	menu();
+	if(gameSates = 1){
+	 whatever you need to call for the audio player;
+	 getIn = true;
+	}
+	if(gameStates = 2){
+	 instruct();
+	 getIn = true;
+	}
+	if(the rectangle in the bottom right corner is pressed){
+	 gameStates = 0;
+	 getIn = false;
+	}
+}
