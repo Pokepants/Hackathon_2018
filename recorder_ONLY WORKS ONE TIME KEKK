@@ -1,0 +1,71 @@
+import ddf.minim.*;
+import ddf.minim.ugens.*;
+
+Minim minim;
+
+// for recording
+AudioInput in;
+AudioRecorder recorder;
+boolean recorded;
+int thing = 1;
+
+// for playing back
+AudioOutput out;
+FilePlayer player;
+
+void setup(){
+  size(800, 600);//size of program
+  strokeWeight(2);//sets the stroke for the rects
+  rectMode(CENTER);//sligns the rects
+  textAlign(CENTER, CENTER);//aligns  text
+  textSize(10);//sets text size  
+  minim = new Minim(this);
+  in = minim.getLineIn(Minim.STEREO, 2048);
+  recorder = minim.createRecorder(in, "myrecording.wav");
+  out = minim.getLineOut(Minim.STEREO);
+}
+  
+void keyReleased(){
+  if ( !recorded && key == 'r' ){
+    if ( recorder.isRecording() ) 
+    {
+      recorder.endRecord();
+      recorded = true;
+    }
+    else 
+    {
+      recorder.beginRecord();
+    }
+  }
+  if ( recorded && key == ' ' ){
+
+    if ( player != null )
+    {
+        player.unpatch( out );
+        player.close();
+    }
+    player = new FilePlayer( recorder.save() );
+    player.patch( out );
+    player.play();
+  }
+  if(recorded && key == 'z'){
+    recorded = false;
+  }
+}
+
+void draw(){
+  background(0); 
+  stroke(255);
+  if ( recorder.isRecording() )
+  {
+    text("Now recording, press the r key to stop recording.", 200, 15);
+  }
+  else if ( !recorded )
+  {
+    text("Press the r key to start recording.", 200, 15);
+  }
+  else
+  {
+    text("Press the space key to save the recording to disk and play it back in the sketch.", 200, 15);
+  }
+}
