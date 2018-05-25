@@ -1,0 +1,5 @@
+void instruct(){
+	text("->Press d for a delay.",x,y);
+	text("->Press t for a timer.",x,y);
+	text("->Press enter to confirm delay or timer.",x,y);
+}
